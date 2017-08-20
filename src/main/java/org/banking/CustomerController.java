@@ -5,6 +5,8 @@ import org.banking.agencys.Bank;
 import org.banking.dto.CustomerDTO;
 import org.banking.mappers.CustomerMapper;
 import org.banking.peoples.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,8 @@ import java.util.List;
 
 @RestController("/bank")
 public class CustomerController implements ErrorController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
 
     private final CustomerMapper customerMapper;
 
@@ -50,12 +54,13 @@ public class CustomerController implements ErrorController {
         for (Customer customer : customers) {
             if ((Integer.valueOf(id)).equals(customer.getId())) {
                 customerToSend = customer;
-                System.out.println(customer);
                 break;
             }
         }
 
         Gson gson = new Gson();
+
+        LOGGER.debug("Found customer: {}", customerToSend);
 
         return gson.toJson(customerToSend);
     }
@@ -65,5 +70,6 @@ public class CustomerController implements ErrorController {
     public void addCustomer(@RequestBody CustomerDTO customerDTO) {
         Customer customer = customerMapper.fromDtoToCustomer(customerDTO);
         bank.setCustomer(customer);
+        LOGGER.debug("Add customer {}", customer);
     }
 }
