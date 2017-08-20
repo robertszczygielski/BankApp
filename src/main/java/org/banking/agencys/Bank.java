@@ -3,6 +3,7 @@ package org.banking.agencys;
 import org.banking.peoples.Customer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Bank {
@@ -15,7 +16,7 @@ public class Bank {
     }
 
     public List<Customer> getCustomers() {
-        return customers;
+        return customers != null ? customers : Collections.emptyList();
     }
 
     public void setCustomers(List<Customer> customers) {

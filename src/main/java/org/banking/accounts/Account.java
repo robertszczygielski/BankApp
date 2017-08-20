@@ -1,8 +1,9 @@
 package org.banking.accounts;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public abstract class Account {
+public abstract class Account implements Serializable {
 
     private BigDecimal balance;
     private BigDecimal interests;
@@ -22,6 +23,14 @@ public abstract class Account {
             this.balance = balance;
         }
         this.balance = this.balance.add(balance);
+    }
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public BigDecimal getInterests() {
