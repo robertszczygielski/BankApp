@@ -16,4 +16,12 @@ public class CustomerMapperImpl implements CustomerMapper {
 
         return customer;
     }
+
+    @Override
+    public org.banking.entity.Customer fromDtoToCustomerEntity(CustomerDTO customerDTO) {
+        org.banking.entity.Customer customer = new org.banking.entity.Customer(customerDTO.getFirstName(),
+                customerDTO.getLastName());
+
+        return customer;
+    }
 }
